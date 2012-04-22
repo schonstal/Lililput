@@ -6,19 +6,29 @@ package
 
   public class PlayState extends FlxState
   {
-    private var word:FlxText;
+    private var wordGroup:WordGroup = new WordGroup();
+    private var currentWordGroup:WordGroup;
+
+    private var lanes:Array;
+    private var bigLane:FlxGroup;
 
     public override function create():void {
-      word = new FlxText(0,0,FlxG.width,randomWord());
-      add(word);
+      currentWordGroup = wordGroup;
+      wordGroup.init(randomWord(), 0, 0);
+      wordGroup.onComplete = function():void {
+        wordGroup.init(randomWord(), 0, 0);
+      }
+      add(wordGroup);
+
+      add(new EnemyLane());
     }
 
     public override function update():void {
-      if(FlxG.keys.justPressed("SPACE")) word.text = randomWord();
+      currentWordGroup.capture();
       super.update();
     }
 
-    private function randomWord():String {
+    private function randomWord():Array {
       //Grab a random word
       var word:String = Constants.WORDS[Math.floor(Math.random() * Constants.WORDS.length)];
 
@@ -33,8 +43,7 @@ package
           break;
         }
       }
-      word = letters.join('');
-      return word;
+      return letters;
     }
   }
 }

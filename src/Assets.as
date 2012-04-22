@@ -4,6 +4,7 @@ package
 
   public class Assets
   {
-    //[Embed(source = "../data/sounds.swf", symbol="sfx1")] public static var Sfx1:Class;
+    [Embed(source = "../data/letters.png")] public static var Letters:Class;
+    [Embed(source = "../data/enemy.png")] public static var Enemy:Class;
   }
 }

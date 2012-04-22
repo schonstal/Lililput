@@ -50,12 +50,17 @@ package
 
         public function initializeWords():void {
           _alphabet = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
-          for each(letter:String in alphabet) {
+          /*
+          for each(var letter:String in alphabet) {
             _words[letter] = new Array();
+            for(var i:int = 0; i < 14; i++) {
+              _words[letter][i] = new Array();
+            }
           }
-          for each(word:String in Constants.WORDS) {
-            _words[word[0]].push(word);
+          for each(var word:String in Constants.WORDS) {
+            _words[word[0]][word.length].push(word);
           }
+          */
         }
     }
 }
