@@ -22,6 +22,9 @@ package
     public static const DEATH_ZONE:Number = 65;
 
     public override function create():void {
+      FlxG.playMusic(Assets.GameplayMusic);
+      FlxG.music.fadeIn(15);
+
       background = new FlxSprite(0,0);
       background.loadGraphic(Assets.Background, false, false, 320, 180);
       add(background);
