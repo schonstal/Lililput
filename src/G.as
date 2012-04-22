@@ -10,6 +10,7 @@ package
         public var _alphabet:Array;
         public var _wordGroup:WordGroup;
         public var _wordGroupGroup:FlxGroup;
+        public var _takenLetters:Object;
 
         private static var _instance:G = null;
 
@@ -22,6 +23,7 @@ package
                 _instance._score = 0;
                 _instance.initializeWords();
                 _instance._wordGroupGroup = new FlxGroup();
+                _instance._takenLetters = {};
             }
 
             return _instance;
@@ -65,9 +67,20 @@ package
 
         public static function randomWord(minLength:Number = 4, maxLength:Number = 8):Array {
           //Grab a random word
-          var wordBucket:Object = words[Math.floor((Math.random() * (maxLength-minLength)) + minLength)]
-          var startingLetter:String = nextLetter();
+          var length:Number = Math.floor((Math.random() * (maxLength-minLength)) + minLength);
+          var wordBucket:Object = words[length]
+          var startingLetter:String;
+          var availableLetters:Array = [];
+          for(var k:String in wordBucket) {
+            if(instance._takenLetters[k] == null) {
+              availableLetters.push(k);
+            }
+          }
+          startingLetter = availableLetters[Math.floor(Math.random() * availableLetters.length)];
+          if(startingLetter == null) return [];
+
           var word:String = wordBucket[startingLetter][Math.floor(Math.random() * wordBucket[startingLetter].length)];
+          FlxG.log(wordBucket[startingLetter]);
 
           //Go through each letter that's not the first, pick a random one, then swap
           var letters:Array = word.split('');
@@ -83,11 +96,18 @@ package
           return letters;
         }
 
-        public static function nextLetter():String {
-          return "A";
+        public static function pressedLetter(letter:String):void {
+          if(wordGroup == null && instance._takenLetters[letter] != null) {
+            wordGroup = instance._takenLetters[letter];
+          }
+        }
+
+        public static function takeLetter(letter:String, wordGroup:WordGroup):void {
+          instance._takenLetters[letter] = wordGroup;
         }
 
         public static function releaseLetter(letter:String):void {
+          instance._takenLetters[letter] = null;
         }
 
         public function initializeWords():void {
