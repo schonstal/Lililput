@@ -13,18 +13,18 @@ package
     private var bigLane:FlxGroup;
 
     public override function create():void {
-      currentWordGroup = wordGroup;
-      wordGroup.init(randomWord(), 0, 0);
+      add(new EnemyLane());
+
+      G.wordGroup = wordGroup;
+      wordGroup.init(randomWord(), 0, 100);
       wordGroup.onComplete = function():void {
-        wordGroup.init(randomWord(), 0, 0);
+        wordGroup.init(randomWord(), 0, 100);
       }
       add(wordGroup);
-
-      add(new EnemyLane());
     }
 
     public override function update():void {
-      currentWordGroup.capture();
+      G.wordGroup.capture();
       super.update();
     }
 
