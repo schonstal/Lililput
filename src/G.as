@@ -65,8 +65,6 @@ package
 
         public static function randomWord(minLength:Number = 4, maxLength:Number = 8):Array {
           //Grab a random word
-          //var word:String = Constants.WORDS[Math.floor(Math.random() * Constants.WORDS.length)];
-
           var wordBucket:Object = words[Math.floor((Math.random() * (maxLength-minLength)) + minLength)]
           var startingLetter:String = nextLetter();
           var word:String = wordBucket[startingLetter][Math.floor(Math.random() * wordBucket[startingLetter].length)];
