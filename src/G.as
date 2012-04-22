@@ -8,6 +8,7 @@ package
         public var _api:KongApi;
         public var _words:Object;
         public var _alphabet:Array;
+        public var _wordGroup:WordGroup;
 
         private static var _instance:G = null;
 
@@ -38,6 +39,14 @@ package
 
         public static function set api(value:KongApi):void {
             instance._api = value;
+        }
+
+        public static function get wordGroup():WordGroup {
+            return instance._wordGroup;
+        }
+
+        public static function set wordGroup(value:WordGroup):void {
+            instance._wordGroup = value;
         }
 
         public static function get words():Object {

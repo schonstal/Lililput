@@ -15,7 +15,7 @@ package
     public override function create():void {
       add(new EnemyLane());
 
-      currentWordGroup = wordGroup;
+      G.wordGroup = wordGroup;
       wordGroup.init(randomWord(), 0, 100);
       wordGroup.onComplete = function():void {
         wordGroup.init(randomWord(), 0, 100);
@@ -24,7 +24,7 @@ package
     }
 
     public override function update():void {
-      currentWordGroup.capture();
+      G.wordGroup.capture();
       super.update();
     }
 
