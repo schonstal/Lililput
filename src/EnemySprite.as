@@ -67,7 +67,7 @@ package
     }
 
     public override function update():void {
-      if(if walking && x > PlayState.DEATH_ZONE - width/2) {
+      if(!walking || x > PlayState.DEATH_ZONE - width/2) {
         if(!flailing) {
           if(readyToFling) {
             flailing = true;

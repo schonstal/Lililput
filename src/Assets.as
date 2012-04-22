@@ -11,5 +11,7 @@ package
     [Embed(source = "../data/fattyShadow.png")] public static var FattyShadow:Class;
     [Embed(source = "../data/background.png")] public static var Background:Class;
     [Embed(source = "../data/foreground.png")] public static var Foreground:Class;
+
+    [Embed(source = "../data/music.swf", symbol="gameplayMusic")] public static var GameplayMusic:Class;
   }
 }
