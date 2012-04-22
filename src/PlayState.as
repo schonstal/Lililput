@@ -17,7 +17,7 @@ package
     private var footprintSprite:FlxSprite;
     private var smallFootSprite:FlxSprite;
 
-    public static const FIRST_LANE_Y:Number = 100;
+    public static const FIRST_LANE_Y:Number = 85;
 
     public override function create():void {
       background = new FlxSprite(0,0);
@@ -31,9 +31,11 @@ package
       smallFootSprite = new FlxSprite(0,0);
       smallFootSprite.makeGraphic(1,1,0x44000000);
 
-      for(var i:Number = FIRST_LANE_Y; i < FlxG.height - EnemyLane.HEIGHT; i += EnemyLane.HEIGHT) {
-        add(new EnemyLane(i));
-      }
+      add(new EnemyLane(80, "Large"));
+      add(new EnemyLane(105, "Small"));
+      add(new EnemyLane(120, "Large"));
+      add(new EnemyLane(145, "Small"));
+//      add(new EnemyLane(145, "Large"));
 
       add(G.wordGroupGroup);
 
