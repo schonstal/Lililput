@@ -43,11 +43,19 @@ package
       for each(var s:LetterSprite in letterSprites) {
         s.explode();
       }
-      G.wordGroup = null;
+      if(this == G.wordGroup) G.wordGroup = null;
       G.releaseLetter(letters[0]);
       enemy.stop();
       //setAll("exists", false);
       //if(onComplete != null) onComplete();
+    }
+
+    public function prepareToDie():void {
+      G.releaseLetter(letters[0]);
+      if(this == G.wordGroup) G.wordGroup = null;
+      for each(var letterSprite:LetterSprite in members) {
+        letterSprite.prepareToDie();
+      }
     }
 
     public function set xVelocity(value:Number):void {
