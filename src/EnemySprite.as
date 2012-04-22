@@ -83,12 +83,14 @@ package
           velocity.x = 0;
           play("prepare_to_explode");
           preparingToExplode = true;
+          wordGroup.prepareToDie();
         }
         if(finished) {
           FlxG.shake(0.01, shakeAmount);
           lane.onExplode(x,y);
           exists = false;
           shadow.exists = false;
+          wordGroup.complete();
         }
       }
 
