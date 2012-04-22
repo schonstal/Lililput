@@ -83,17 +83,17 @@ package
 
         public function initializeWords():void {
           _alphabet = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
-          /*
-          for each(var letter:String in alphabet) {
-            _words[letter] = new Array();
-            for(var i:int = 0; i < 14; i++) {
-              _words[letter][i] = new Array();
-            }
-          }
+          _words = {};
+
           for each(var word:String in Constants.WORDS) {
-            _words[word[0]][word.length].push(word);
+            var firstLetter:String = word.charAt(0);
+            var length:int = word.length;
+
+            if(_words[length] == null) _words[length] = [];
+            if(_words[length][firstLetter] == null) _words[length][firstLetter] = [];
+
+            _words[length][firstLetter].push(word);
           }
-          */
         }
     }
 }

@@ -12,8 +12,12 @@ package
     private var lanes:Array;
     private var bigLane:FlxGroup;
 
+    public static const FIRST_LANE_Y:Number = 100;
+
     public override function create():void {
-      add(new EnemyLane());
+      for(var i:Number = FIRST_LANE_Y; i < FlxG.height - EnemyLane.HEIGHT; i += EnemyLane.HEIGHT) {
+        add(new EnemyLane(i));
+      }
 
       G.wordGroup = wordGroup;
       wordGroup.init(G.randomWord(), 0, 100);
