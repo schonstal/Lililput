@@ -63,9 +63,13 @@ package
           return instance._alphabet;
         }
 
-        public static function randomWord():Array {
+        public static function randomWord(minLength:Number = 4, maxLength:Number = 8):Array {
           //Grab a random word
-          var word:String = Constants.WORDS[Math.floor(Math.random() * Constants.WORDS.length)];
+          //var word:String = Constants.WORDS[Math.floor(Math.random() * Constants.WORDS.length)];
+
+          var wordBucket:Object = words[Math.floor((Math.random() * (maxLength-minLength)) + minLength)]
+          var startingLetter:String = nextLetter();
+          var word:String = wordBucket[startingLetter][Math.floor(Math.random() * wordBucket[startingLetter].length)];
 
           //Go through each letter that's not the first, pick a random one, then swap
           var letters:Array = word.split('');
@@ -81,6 +85,13 @@ package
           return letters;
         }
 
+        public static function nextLetter():String {
+          return "A";
+        }
+
+        public static function releaseLetter(letter:String):void {
+        }
+
         public function initializeWords():void {
           _alphabet = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
           _words = {};
@@ -89,7 +100,7 @@ package
             var firstLetter:String = word.charAt(0);
             var length:int = word.length;
 
-            if(_words[length] == null) _words[length] = [];
+            if(_words[length] == null) _words[length] = {};
             if(_words[length][firstLetter] == null) _words[length][firstLetter] = [];
 
             _words[length][firstLetter].push(word);
