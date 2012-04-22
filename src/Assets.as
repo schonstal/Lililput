@@ -6,5 +6,6 @@ package
   {
     [Embed(source = "../data/letters.png")] public static var Letters:Class;
     [Embed(source = "../data/enemy.png")] public static var Enemy:Class;
+    [Embed(source = "../data/fatty.png")] public static var Fatty:Class;
   }
 }
