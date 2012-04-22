@@ -80,7 +80,6 @@ package
           if(startingLetter == null) return [];
 
           var word:String = wordBucket[startingLetter][Math.floor(Math.random() * wordBucket[startingLetter].length)];
-          FlxG.log(wordBucket[startingLetter]);
 
           //Go through each letter that's not the first, pick a random one, then swap
           var letters:Array = word.split('');

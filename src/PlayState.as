@@ -16,32 +16,39 @@ package
     private var foreground:FlxSprite;
     private var footprintSprite:FlxSprite;
     private var smallFootSprite:FlxSprite;
+    private var headSprite:FlxSprite;
 
     public static const FIRST_LANE_Y:Number = 85;
+    public static const DEATH_ZONE:Number = 65;
 
     public override function create():void {
       background = new FlxSprite(0,0);
       background.loadGraphic(Assets.Background, false, false, 320, 180);
       add(background);
 
+      /*
       footprintSprite = new FlxSprite(0,0);
       footprintSprite.makeGraphic(FlxG.width, FlxG.height, 0x00000000, true);
       add(footprintSprite);
 
       smallFootSprite = new FlxSprite(0,0);
       smallFootSprite.makeGraphic(1,1,0x44000000);
+      */
+
+      headSprite = new FlxSprite(0,0);
+      headSprite.makeGraphic(DEATH_ZONE, FlxG.height, 0xff990000, true);
+      add(headSprite);
 
       add(new EnemyLane(80, "Large"));
       add(new EnemyLane(105, "Small"));
       add(new EnemyLane(120, "Large"));
       add(new EnemyLane(145, "Small"));
-//      add(new EnemyLane(145, "Large"));
-
-      add(G.wordGroupGroup);
 
       foreground = new FlxSprite(0,FlxG.height-22);
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
       add(foreground);
+
+      add(G.wordGroupGroup);
     }
 
     public function footPrint(X:Number, Y:Number):void {
