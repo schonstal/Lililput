@@ -10,7 +10,7 @@ package
     public function TniyGame() {
       forceDebugger = true;
       FlxG.debug = true;
-      super(320,180,PlayState,4,60);
+      super(320,180,MenuState,4,60);
     }
   }
 }
