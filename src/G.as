@@ -5,6 +5,9 @@ package
     public class G
     {
         public var _score:Number;
+        public var _highScore:Number;
+        public var _save:FlxSave;
+
         public var _api:KongApi;
         public var _words:Object;
         public var _alphabet:Array;
@@ -23,6 +26,7 @@ package
 
         private static function get instance():G {
             if(_instance == null) {
+              _instance = new G();
               init();
             }
 
@@ -30,19 +34,33 @@ package
         }
 
         public static function init():void {
-            _instance = new G();
             _instance._score = 0;
             _instance.initializeWords();
             _instance._wordGroupGroup = new FlxGroup();
             _instance._takenLetters = {};
+
+            _instance._save = new FlxSave();
+            _instance._save.bind("tniy-game");
+            if(_instance._save.data.highScore != null)
+              _instance._highScore = instance._save.data.highScore;
+            else
+              _instance._highScore = 0;
         }
 
         public static function get score():Number {
             return instance._score;
         }
 
+        public static function get highScore():Number {
+          return instance._highScore;
+        }
+
         public static function set score(value:Number):void {
             instance._score = value;
+            if(instance._score > instance._highScore) {
+                instance._highScore = instance._score;
+                instance._save.data.highScore = instance._score;
+            }
         }
 
         public static function get face():FaceSprite {

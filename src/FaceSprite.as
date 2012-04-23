@@ -20,15 +20,22 @@ package
     public function FaceSprite() {
       super(0,0);
       loadGraphic(Assets.Face, true, true, 64, 180); 
-      addAnimation("blow", [8,9,9,9,8], 15, false);
+      for(var i:int=1; i<=6; i++) {
+        var frames:Array = [8];
+        for(var j:int=0; j<i; j++) {
+          frames.push(9);
+        }
+        frames.push(8);
+        addAnimation("blow"+i, frames, 15, false);
+      }
     }
 
     public function wince():void {
       winceTimer = WINCE_TIME;
     }
 
-    public function blow():void {
-      play("blow");
+    public function blow(length:int):void {
+      play("blow"+Math.floor(length/2));
       blowing = true;
     }
 

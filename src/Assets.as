@@ -13,6 +13,8 @@ package
     [Embed(source = "../data/foreground.png")] public static var Foreground:Class;
     [Embed(source = "../data/gameOver.png")] public static var GameOver:Class;
 
+    [Embed(source = "../data/numbers.png")] public static var Numbers:Class;
+
     
     //Background
     [Embed(source = "../data/ground01.png")] public static var Ground01:Class;

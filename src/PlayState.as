@@ -9,7 +9,7 @@ package
   public class PlayState extends FlxState
   {
     private var wordGroup:WordGroup = new WordGroup();
-    private var currentWordGroup:WordGroup;
+    private var timeTextGroup:WordGroup;
 
     private var lanes:Array;
     private var bigLane:FlxGroup;
@@ -22,8 +22,8 @@ package
 
     private var finishTimer:Number = 0;
 
-    private var currentWord:FlxBitmapFont;
-    private var currentWordTaken:FlxBitmapFont;
+    private var timeText:FlxBitmapFont;
+    private var timeTextTaken:FlxBitmapFont;
 
     private var restartWordGroup:WordGroup;
 
@@ -32,11 +32,12 @@ package
     public static const FIRST_LANE_Y:Number = 85;
     public static const DEATH_ZONE:Number = 65;
     public static const FINISH_TIME:Number = 0.7;
+    public static const START_FADE_TIME:Number = 15;
 
     public override function create():void {
       G.init();
       FlxG.playMusic(Assets.GameplayMusic);
-      FlxG.music.fadeIn(15);
+      FlxG.music.fadeIn(START_FADE_TIME);
 
       var background:FlxSprite = new FlxSprite(0,0);
       background.loadGraphic(Assets.Stars, false, false, 320, 160);
@@ -74,13 +75,11 @@ package
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
       add(foreground);
 
-/*
-      currentWord = new FlxBitmapFont(Assets.LettersBig, 16, 16, FlxBitmapFont.TEXT_SET10, 6, 0, 0);
-			currentWord.setText("AMISSISSIPPI", true, 0, 8, FlxBitmapFont.ALIGN_CENTER, false);
-      currentWord.x = currentWord.y = 0;
-      currentWord.width = FlxG.width;
-      add(currentWord);
-*/
+      timeText = new FlxBitmapFont(Assets.Numbers, 8, 8, "0123456789'\"", 4, 0, 0);
+			timeText.setText("00'00\"00", true, 0, 8, FlxBitmapFont.ALIGN_RIGHT, false);
+      timeText.y = 4;
+      timeText.x = FlxG.camera.width - 70;
+      add(timeText);
 
       G.health = 1;
 
@@ -105,7 +104,28 @@ package
       if(onCreate != null) onCreate();
     }
 
+    private function timeString(time:Number):String {
+      var tempTime:Number = time;
+      var minutes:Number = Math.floor(tempTime/60);
+      tempTime -= 60*minutes;
+      var seconds:Number = Math.floor(tempTime);
+      tempTime -= seconds;
+      var milliseconds:Number = Math.floor(tempTime*100);
+      return zeroPad(minutes) + "'" + zeroPad(seconds) + "\"" + zeroPad(milliseconds);
+    }
+
+    private function zeroPad(n:Number):String {
+      return (n < 10 ? "0" : "") + (n as int);
+    }
+
     public override function update():void {
+      timeText.alpha = lifeBar.alpha = G.score/5;
+
+      if(G.health > 0) {
+        G.score += FlxG.elapsed;
+        timeText.text = timeString(G.score); 
+      }
+
       if(finished) {
         finishTimer += FlxG.elapsed;
         if(finishTimer >= FINISH_TIME) {
@@ -123,7 +143,6 @@ package
       lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
       if(G.health <= 0 && gameOverSprite.alpha < 1) {
         for each(var w:WordGroup in G.wordGroupGroup.members) {
-          FlxG.log(w);
           for each(var letterSprite:LetterSprite in wordGroup.members) {
               letterSprite.exists = false;
           }
@@ -132,6 +151,7 @@ package
           FlxG.music.stop();
           FlxG.music.destroy();
           G.wordGroup = null;
+          G.api.kongregate.stats.submit("milliseconds_survived", Math.floor(G.score*100));
         }
         FlxG.timeScale = 0.1;
         gameOverSprite.alpha += FlxG.elapsed*3;

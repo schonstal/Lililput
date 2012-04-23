@@ -88,7 +88,7 @@ package
         letterIndex++;
         if(letterIndex >= letters.length) {
           complete();
-          if(G.face) G.face.blow();
+          if(G.face) G.face.blow(letters.length);
         }
         anyJustPressed = true;
       } else if(FlxG.keys.any() && !anyJustPressed) {
