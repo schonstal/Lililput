@@ -20,14 +20,20 @@ package
     private var gameOverSprite:FlxSprite;
 
     private var lifeBar:FlxSprite;
+    private var finished:Boolean = false;
+
+    private var finishTimer:Number = 0;
 
     private var currentWord:FlxBitmapFont;
     private var currentWordTaken:FlxBitmapFont;
 
     private var restartWordGroup:WordGroup;
 
+    public var onCreate:Function;
+
     public static const FIRST_LANE_Y:Number = 85;
     public static const DEATH_ZONE:Number = 65;
+    public static const FINISH_TIME:Number = 0.7;
 
     public override function create():void {
       G.init();
@@ -75,13 +81,26 @@ package
       restartWordGroup = new WordGroup();
       restartWordGroup.init("RETSART".split(''), FlxG.camera.width/2 - 28, FlxG.camera.height * (2/3), null,
         function():void {
-          FlxG.fade(0xff000000, 2, function():void {
-            FlxG.switchState(new PlayState());
-          });
+          finished = true;
         });
+
+      if(onCreate != null) onCreate();
     }
 
     public override function update():void {
+      if(finished) {
+        finishTimer += FlxG.elapsed;
+        if(finishTimer >= FINISH_TIME) {
+          FlxG.fade(0xff000000, 2, function():void {
+            var state:PlayState = new PlayState();
+            state.onCreate = function():void {
+              FlxG.flash(0xff000000, 2);
+            }
+            FlxG.switchState(state);
+          });
+        }
+      }
+
       lifeBar.scale.x = G.health;
       lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
       if(G.health <= 0 && gameOverSprite.alpha < 1) {
