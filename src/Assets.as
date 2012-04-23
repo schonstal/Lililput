@@ -14,6 +14,8 @@ package
     [Embed(source = "../data/foreground.png")] public static var Foreground:Class;
     [Embed(source = "../data/gameOver.png")] public static var GameOver:Class;
 
+    [Embed(source = "../data/face.png")] public static var Face:Class;
+
     [Embed(source = "../data/music.swf", symbol="gameplayMusic")] public static var GameplayMusic:Class;
   }
 }

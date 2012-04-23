@@ -16,7 +16,6 @@ package
 
     private var background:FlxSprite;
     private var foreground:FlxSprite;
-    private var headSprite:FlxSprite;
     private var gameOverSprite:FlxSprite;
 
     private var lifeBar:FlxSprite;
@@ -44,14 +43,13 @@ package
       background.loadGraphic(Assets.Background, false, false, 320, 180);
       add(background);
 
-      headSprite = new FlxSprite(0,0);
-      headSprite.makeGraphic(DEATH_ZONE, FlxG.height, 0xff990000, true);
-      add(headSprite);
-
       add(new EnemyLane(80, "Large"));
       add(new EnemyLane(105, "Small"));
       add(new EnemyLane(120, "Large"));
       add(new EnemyLane(145, "Small"));
+
+      G.face = new FaceSprite();
+      add(G.face);
 
       foreground = new FlxSprite(0,FlxG.height-22);
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
