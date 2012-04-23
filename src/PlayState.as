@@ -103,7 +103,28 @@ package
       if(onCreate != null) onCreate();
     }
 
+    private function timeString(time:Number):String {
+      var tempTime:Number = time;
+      var minutes:Number = Math.floor(tempTime/60);
+      tempTime -= 60*minutes;
+      var seconds:Number = Math.floor(tempTime);
+      tempTime -= seconds;
+      var milliseconds:Number = Math.floor(tempTime*100);
+      return zeroPad(minutes) + "'" + zeroPad(seconds) + "\"" + zeroPad(milliseconds);
+    }
+
+    private function zeroPad(n:Number):String {
+      return (n < 10 ? "0" : "") + (n as int);
+    }
+
     public override function update():void {
+      timeText.alpha = FlxG.music.volume;
+
+      if(G.health > 0) {
+        G.score += FlxG.elapsed;
+        timeText.text = timeString(G.score); 
+      }
+
       if(finished) {
         finishTimer += FlxG.elapsed;
         if(finishTimer >= FINISH_TIME) {

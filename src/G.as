@@ -5,6 +5,8 @@ package
     public class G
     {
         public var _score:Number;
+        //public var _score:Number;
+
         public var _api:KongApi;
         public var _words:Object;
         public var _alphabet:Array;
