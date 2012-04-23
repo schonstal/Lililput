@@ -19,8 +19,8 @@ package
     protected var maxSize:Number;
     protected var lowVelocity:Number;
     protected var explosionFrames:Array;
-
     protected var baseAngular:Number;
+    protected var damage:Number;
 
     public static const VARIANCE:Number = 5;
     public static const EXPLOSION_TIME:Number = 0.5;
@@ -91,6 +91,7 @@ package
           exists = false;
           shadow.exists = false;
           wordGroup.complete();
+          G.health -= damage;
         }
       }
 

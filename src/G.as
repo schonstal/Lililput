@@ -11,6 +11,7 @@ package
         public var _wordGroup:WordGroup;
         public var _wordGroupGroup:FlxGroup;
         public var _takenLetters:Object;
+        public var _health:Number;
 
         private static var _instance:G = null;
 
@@ -35,6 +36,14 @@ package
 
         public static function set score(value:Number):void {
             instance._score = value;
+        }
+
+        public static function get health():Number {
+            return instance._health;
+        }
+
+        public static function set health(value:Number):void {
+            instance._health = value;
         }
 
         public static function get api():KongApi {

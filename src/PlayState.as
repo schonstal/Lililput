@@ -18,6 +18,8 @@ package
     private var foreground:FlxSprite;
     private var headSprite:FlxSprite;
 
+    private var lifeBar:FlxSprite;
+
     private var currentWord:FlxBitmapFont;
     private var currentWordTaken:FlxBitmapFont;
 
@@ -52,11 +54,21 @@ package
       currentWord.width = FlxG.width;
       add(currentWord);
 */
+
+      G.health = 1;
+
+      lifeBar = new FlxSprite(0,0);
+      lifeBar.makeGraphic(DEATH_ZONE, 14, 0xffaa44ff, true);
+      add(lifeBar);
+
       add(G.wordGroupGroup);
     }
 
     public override function update():void {
       FlxG.log(G.wordGroup == null ? "null" : G.wordGroup.Word);
+
+      lifeBar.scale.x = G.health;
+      lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
 
       if(G.wordGroup == null) {
         for each(var letter:String in G.alphabet) {
