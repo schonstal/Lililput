@@ -26,8 +26,20 @@ package
         add(background);
       }
 
+      background = new FlxSprite(92,103);
+      background.loadGraphic(Assets.Shard01, false, false, 46, 16);
+      add(background);
+
+      background = new FlxSprite(150,130);
+      background.loadGraphic(Assets.Shard02, false, false, 36, 8);
+      add(background);
+
       G.face = new FaceSprite();
       add(G.face);
+
+      background = new FlxSprite(0,-55);
+      background.loadGraphic(Assets.Helmet, false, false, 102, 235);
+      add(background);
 
       foreground = new FlxSprite(0,FlxG.height-22);
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
@@ -35,7 +47,7 @@ package
 
       startWordGroup = new WordGroup();
       startWordGroup.init("STRAT".split(''), 150, -900, null, function():void {
-          TweenLite.to(FlxG.camera.scroll, 2, 
+          TweenLite.to(FlxG.camera.scroll, 5, 
               {y: 0, ease: Quart.easeInOut,
               onComplete: function():void { 
                 FlxG.switchState(new PlayState());

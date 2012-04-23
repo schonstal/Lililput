@@ -9,7 +9,7 @@ package
   public class PlayState extends FlxState
   {
     private var wordGroup:WordGroup = new WordGroup();
-    private var currentWordGroup:WordGroup;
+    private var timeTextGroup:WordGroup;
 
     private var lanes:Array;
     private var bigLane:FlxGroup;
@@ -22,8 +22,8 @@ package
 
     private var finishTimer:Number = 0;
 
-    private var currentWord:FlxBitmapFont;
-    private var currentWordTaken:FlxBitmapFont;
+    private var timeText:FlxBitmapFont;
+    private var timeTextTaken:FlxBitmapFont;
 
     private var restartWordGroup:WordGroup;
 
@@ -74,13 +74,11 @@ package
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
       add(foreground);
 
-/*
-      currentWord = new FlxBitmapFont(Assets.LettersBig, 16, 16, FlxBitmapFont.TEXT_SET10, 6, 0, 0);
-			currentWord.setText("AMISSISSIPPI", true, 0, 8, FlxBitmapFont.ALIGN_CENTER, false);
-      currentWord.x = currentWord.y = 0;
-      currentWord.width = FlxG.width;
-      add(currentWord);
-*/
+      timeText = new FlxBitmapFont(Assets.Numbers, 8, 8, "0123456789'\"", 4, 0, 0);
+			timeText.setText("00'00\"00", true, 0, 8, FlxBitmapFont.ALIGN_RIGHT, false);
+      timeText.y = 4;
+      timeText.x = FlxG.camera.width - 70;
+      add(timeText);
 
       G.health = 1;
 
