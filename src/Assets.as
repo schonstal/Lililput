@@ -5,6 +5,7 @@ package
   public class Assets
   {
     [Embed(source = "../data/letters.png")] public static var Letters:Class;
+    [Embed(source = "../data/lettersBig.png")] public static var LettersBig:Class;
     [Embed(source = "../data/enemy.png")] public static var Enemy:Class;
     [Embed(source = "../data/enemyShadow.png")] public static var EnemyShadow:Class;
     [Embed(source = "../data/fatty.png")] public static var Fatty:Class;

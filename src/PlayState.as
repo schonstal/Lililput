@@ -4,6 +4,8 @@ package
   import com.greensock.TweenLite;
   import com.greensock.easing.*; 
 
+  import org.flixel.plugin.photonstorm.*;
+
   public class PlayState extends FlxState
   {
     private var wordGroup:WordGroup = new WordGroup();
@@ -17,6 +19,9 @@ package
     private var footprintSprite:FlxSprite;
     private var smallFootSprite:FlxSprite;
     private var headSprite:FlxSprite;
+
+    private var currentWord:FlxBitmapFont;
+    private var currentWordTaken:FlxBitmapFont;
 
     public static const FIRST_LANE_Y:Number = 85;
     public static const DEATH_ZONE:Number = 65;
@@ -37,7 +42,6 @@ package
       smallFootSprite = new FlxSprite(0,0);
       smallFootSprite.makeGraphic(1,1,0x44000000);
       */
-
       headSprite = new FlxSprite(0,0);
       headSprite.makeGraphic(DEATH_ZONE, FlxG.height, 0xff990000, true);
       add(headSprite);
@@ -50,6 +54,14 @@ package
       foreground = new FlxSprite(0,FlxG.height-22);
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
       add(foreground);
+
+/*
+      currentWord = new FlxBitmapFont(Assets.LettersBig, 16, 16, FlxBitmapFont.TEXT_SET10, 6, 0, 0);
+			currentWord.setText("AMISSISSIPPI", true, 0, 8, FlxBitmapFont.ALIGN_CENTER, false);
+      currentWord.x = currentWord.y = 0;
+      currentWord.width = FlxG.width;
+      add(currentWord);
+*/
 
       add(G.wordGroupGroup);
     }

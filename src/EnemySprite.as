@@ -18,6 +18,7 @@ package
     protected var minSize:Number;
     protected var maxSize:Number;
     protected var lowVelocity:Number;
+    protected var explosionFrames:Array;
 
     protected var baseAngular:Number;
 
@@ -34,8 +35,7 @@ package
 
       addAnimation("walk", [0,1,2,3,4,5,6,7,8,9], 20, true);
       addAnimation("flail", [0,9], 30);
-      addAnimation("prepare_to_explode",
-        [10,11,12,13,14,15,16,17,18,19,20,21,21,20,22,20,22,20,22,20,22], 15, false);
+      addAnimation("prepare_to_explode", explosionFrames, 15, false);
 
       play("walk");
       _curAnim.delay = 1/walkSpeed;
