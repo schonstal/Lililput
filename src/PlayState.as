@@ -143,7 +143,6 @@ package
       lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
       if(G.health <= 0 && gameOverSprite.alpha < 1) {
         for each(var w:WordGroup in G.wordGroupGroup.members) {
-          FlxG.log(w);
           for each(var letterSprite:LetterSprite in wordGroup.members) {
               letterSprite.exists = false;
           }
@@ -152,6 +151,7 @@ package
           FlxG.music.stop();
           FlxG.music.destroy();
           G.wordGroup = null;
+          G.api.kongregate.stats.submit("milliseconds_survived", Math.floor(G.score*100));
         }
         FlxG.timeScale = 0.1;
         gameOverSprite.alpha += FlxG.elapsed*3;

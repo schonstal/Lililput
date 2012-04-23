@@ -26,6 +26,7 @@ package
 
         private static function get instance():G {
             if(_instance == null) {
+              _instance = new G();
               init();
             }
 
@@ -33,7 +34,6 @@ package
         }
 
         public static function init():void {
-            _instance = new G();
             _instance._score = 0;
             _instance.initializeWords();
             _instance._wordGroupGroup = new FlxGroup();
