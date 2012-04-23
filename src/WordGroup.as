@@ -10,9 +10,14 @@ package
 
     private var anyJustPressed:Boolean = false;
 
+    private var alpha:Number = 1;
+
     public var onComplete:Function;
+    public var modal:Boolean = false;
     
     public var enemy:EnemySprite;
+
+    public static const ALPHA_RATE:Number = 2;
 
     public function WordGroup() {
     }
@@ -23,6 +28,7 @@ package
       anyJustPressed = false;
       enemy = owner;
       onComplete = OnComplete;
+      alpha = (G.health > 0 ? 1 : 0);
 
       var i:int = 0;
       for each(var letter:String in word) {
@@ -88,6 +94,10 @@ package
     }
 
     public override function update():void {
+      if(G.health <= 0 && !modal) {
+        alpha -= FlxG.elapsed * ALPHA_RATE;
+        setAll('alpha', alpha);
+      }
       super.update();
     }
   }

@@ -83,6 +83,7 @@ package
         function():void {
           finished = true;
         });
+      restartWordGroup.modal = true;
 
       if(onCreate != null) onCreate();
     }
@@ -104,7 +105,17 @@ package
       lifeBar.scale.x = G.health;
       lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
       if(G.health <= 0 && gameOverSprite.alpha < 1) {
-        if(FlxG.timeScale == 1) FlxG.music.stop();
+        for each(var w:WordGroup in G.wordGroupGroup.members) {
+          FlxG.log(w);
+          for each(var letterSprite:LetterSprite in wordGroup.members) {
+              letterSprite.exists = false;
+          }
+        }
+        if(FlxG.timeScale == 1) {
+          FlxG.music.stop();
+          FlxG.music.destroy();
+          G.wordGroup = null;
+        }
         FlxG.timeScale = 0.1;
         gameOverSprite.alpha += FlxG.elapsed*3;
       } else if(gameOverSprite.alpha >= 1 && FlxG.timeScale < 1) {
