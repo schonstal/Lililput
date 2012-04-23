@@ -92,6 +92,7 @@ package
           shadow.exists = false;
           wordGroup.complete();
           G.health -= damage;
+          if(G.face) G.face.wince();
         }
       }
 

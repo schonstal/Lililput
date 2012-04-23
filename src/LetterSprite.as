@@ -28,7 +28,7 @@ package
     public static const EXPLOSION_Y:Number = -400;
     public static const EXPLOSION_X_MIN:Number = 400;
     public static const EXPLOSION_Y_MIN:Number = -200;
-    public static const EXPLOSION_DELAY_MIN:Number = 0.3;
+    public static const EXPLOSION_DELAY_MIN:Number = 0.15;
     public static const EXPLOSION_ANGULAR:Number = 300;
 
     public static const ACTIVE_BORDER:uint = 0xffffffff;
@@ -110,7 +110,8 @@ package
           angularVelocity = (Math.random() * EXPLOSION_ANGULAR + 500) * direction;
         } else {
           explosionTimer += FlxG.elapsed;
-          if(explosionTimer >= EXPLOSION_DELAY * position + EXPLOSION_DELAY_MIN) {
+          if(explosionTimer >= EXPLOSION_DELAY * position + 
+              (x/FlxG.width) * EXPLOSION_DELAY_MIN) {
             velocity.x = Math.random() * EXPLOSION_X + EXPLOSION_X_MIN;
             velocity.y = Math.random() * EXPLOSION_Y + EXPLOSION_Y_MIN;
             angularVelocity = Math.random() * EXPLOSION_ANGULAR;

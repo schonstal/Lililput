@@ -6,7 +6,7 @@ package
   {
     private var letters:Array;
     private var letterSprites:Array = [];
-    private var letterIndex:Number = 0;
+    public var letterIndex:Number = 0;
 
     private var anyJustPressed:Boolean = false;
 
@@ -88,6 +88,7 @@ package
         letterIndex++;
         if(letterIndex >= letters.length) {
           complete();
+          if(G.face) G.face.blow();
         }
         anyJustPressed = true;
       } else if(FlxG.keys.any() && !anyJustPressed) {
