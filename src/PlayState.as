@@ -17,14 +17,26 @@ package
     private var background:FlxSprite;
     private var foreground:FlxSprite;
     private var headSprite:FlxSprite;
+    private var gameOverSprite:FlxSprite;
+
+    private var lifeBar:FlxSprite;
+    private var finished:Boolean = false;
+
+    private var finishTimer:Number = 0;
 
     private var currentWord:FlxBitmapFont;
     private var currentWordTaken:FlxBitmapFont;
 
+    private var restartWordGroup:WordGroup;
+
+    public var onCreate:Function;
+
     public static const FIRST_LANE_Y:Number = 85;
     public static const DEATH_ZONE:Number = 65;
+    public static const FINISH_TIME:Number = 0.7;
 
     public override function create():void {
+      G.init();
       FlxG.playMusic(Assets.GameplayMusic);
       FlxG.music.fadeIn(15);
 
@@ -52,11 +64,66 @@ package
       currentWord.width = FlxG.width;
       add(currentWord);
 */
+
+      G.health = 1;
+
+      lifeBar = new FlxSprite(0,0);
+      lifeBar.makeGraphic(DEATH_ZONE, 14, 0xffaa44ff, true);
+      add(lifeBar);
+
       add(G.wordGroupGroup);
+
+      gameOverSprite = new FlxSprite(0,0);
+      gameOverSprite.loadGraphic(Assets.GameOver, false, false, 320, 180);
+      gameOverSprite.alpha = 0;
+      add(gameOverSprite);
+
+      restartWordGroup = new WordGroup();
+      restartWordGroup.init("RETSART".split(''), FlxG.camera.width/2 - 28, FlxG.camera.height * (2/3), null,
+        function():void {
+          finished = true;
+        });
+      restartWordGroup.modal = true;
+
+      if(onCreate != null) onCreate();
     }
 
     public override function update():void {
-      FlxG.log(G.wordGroup == null ? "null" : G.wordGroup.Word);
+      if(finished) {
+        finishTimer += FlxG.elapsed;
+        if(finishTimer >= FINISH_TIME) {
+          FlxG.fade(0xff000000, 2, function():void {
+            var state:PlayState = new PlayState();
+            state.onCreate = function():void {
+              FlxG.flash(0xff000000, 2);
+            }
+            FlxG.switchState(state);
+          });
+        }
+      }
+
+      lifeBar.scale.x = G.health;
+      lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
+      if(G.health <= 0 && gameOverSprite.alpha < 1) {
+        for each(var w:WordGroup in G.wordGroupGroup.members) {
+          FlxG.log(w);
+          for each(var letterSprite:LetterSprite in wordGroup.members) {
+              letterSprite.exists = false;
+          }
+        }
+        if(FlxG.timeScale == 1) {
+          FlxG.music.stop();
+          FlxG.music.destroy();
+          G.wordGroup = null;
+        }
+        FlxG.timeScale = 0.1;
+        gameOverSprite.alpha += FlxG.elapsed*3;
+      } else if(gameOverSprite.alpha >= 1 && FlxG.timeScale < 1) {
+        gameOverSprite.alpha = 1;
+        FlxG.timeScale = 1;
+        G.wordGroup = restartWordGroup;
+        add(restartWordGroup);
+      }
 
       if(G.wordGroup == null) {
         for each(var letter:String in G.alphabet) {

@@ -11,6 +11,7 @@ package
         public var _wordGroup:WordGroup;
         public var _wordGroupGroup:FlxGroup;
         public var _takenLetters:Object;
+        public var _health:Number;
 
         private static var _instance:G = null;
 
@@ -19,14 +20,18 @@ package
 
         private static function get instance():G {
             if(_instance == null) {
-                _instance = new G();
-                _instance._score = 0;
-                _instance.initializeWords();
-                _instance._wordGroupGroup = new FlxGroup();
-                _instance._takenLetters = {};
+              init();
             }
 
             return _instance;
+        }
+
+        public static function init():void {
+            _instance = new G();
+            _instance._score = 0;
+            _instance.initializeWords();
+            _instance._wordGroupGroup = new FlxGroup();
+            _instance._takenLetters = {};
         }
 
         public static function get score():Number {
@@ -35,6 +40,14 @@ package
 
         public static function set score(value:Number):void {
             instance._score = value;
+        }
+
+        public static function get health():Number {
+            return instance._health;
+        }
+
+        public static function set health(value:Number):void {
+            instance._health = value;
         }
 
         public static function get api():KongApi {
@@ -96,7 +109,7 @@ package
         }
 
         public static function pressedLetter(letter:String):void {
-          if(wordGroup == null && instance._takenLetters[letter] != null) {
+          if(G.health > 0 && wordGroup == null && instance._takenLetters[letter] != null) {
             wordGroup = instance._takenLetters[letter];
           }
         }
