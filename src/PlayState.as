@@ -32,11 +32,12 @@ package
     public static const FIRST_LANE_Y:Number = 85;
     public static const DEATH_ZONE:Number = 65;
     public static const FINISH_TIME:Number = 0.7;
+    public static const START_FADE_TIME:Number = 15;
 
     public override function create():void {
       G.init();
       FlxG.playMusic(Assets.GameplayMusic);
-      FlxG.music.fadeIn(15);
+      FlxG.music.fadeIn(START_FADE_TIME);
 
       var background:FlxSprite = new FlxSprite(0,0);
       background.loadGraphic(Assets.Stars, false, false, 320, 160);
@@ -118,7 +119,7 @@ package
     }
 
     public override function update():void {
-      timeText.alpha = FlxG.music.volume;
+      timeText.alpha = lifeBar.alpha = G.score/5;
 
       if(G.health > 0) {
         G.score += FlxG.elapsed;
