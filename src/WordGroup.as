@@ -12,7 +12,7 @@ package
 
     private var alpha:Number = 1;
 
-    public var onComplete:Function;
+    private var onCompleteCallbacks:Array = [];
     public var modal:Boolean = false;
     
     public var enemy:EnemySprite;
@@ -27,7 +27,7 @@ package
       letters = word;
       anyJustPressed = false;
       enemy = owner;
-      onComplete = OnComplete;
+      onCompleteCallbacks.push(OnComplete);
       alpha = (G.health > 0 ? 1 : 0);
 
       var i:int = 0;
@@ -43,6 +43,10 @@ package
       }
     }
 
+    public function addOnCompleteCallback(callback:Function):void {
+      onCompleteCallbacks.push(callback);
+    }
+
     //Eventually, this will be an explosion
     public function complete():void {
       //recycle or something
@@ -55,7 +59,9 @@ package
 
       if(enemy != null) enemy.stop();
       //setAll("exists", false);
-      if(onComplete != null) onComplete();
+      for each(var callback:Function in onCompleteCallbacks) {
+       if(callback is Function) callback();
+      }
     }
 
     public function prepareToDie():void {
