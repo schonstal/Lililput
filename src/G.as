@@ -5,7 +5,7 @@ package
     public class G
     {
         public var _score:Number;
-        public var _highScore:Number;
+        public var _highScore:Array;
         public var _save:FlxSave;
 
         public var _api:KongApi;
@@ -40,26 +40,32 @@ package
             _instance._takenLetters = {};
 
             _instance._save = new FlxSave();
-            _instance._save.bind("tniy-game");
+            _instance._save.bind("gluliver-tarvels");
             if(_instance._save.data.highScore != null)
               _instance._highScore = instance._save.data.highScore;
             else
-              _instance._highScore = 0;
+              _instance._highScore = [0,0,0,0,0,0,0,0,0,0];
         }
 
         public static function get score():Number {
             return instance._score;
         }
 
-        public static function get highScore():Number {
+        public static function get highScore():Array {
           return instance._highScore;
         }
 
         public static function set score(value:Number):void {
             instance._score = value;
-            if(instance._score > instance._highScore) {
-                instance._highScore = instance._score;
-                instance._save.data.highScore = instance._score;
+        }
+
+        public static function setHighScore():void {
+            if(instance._score > instance._highScore[9]) {
+                instance._highScore.push(instance._score);
+                instance._highScore.sort(Array.NUMERIC);
+                instance._highScore.reverse();
+                instance._highScore.pop();
+                instance._save.data.highScore = instance._highScore;
             }
         }
 

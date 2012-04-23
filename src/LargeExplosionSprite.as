@@ -6,8 +6,9 @@ package
   {
     public function LargeExplosionSprite() {
       super();
-      //loadGraphic(Assets.Fatty, true, true, 32, 32, false);
-      makeGraphic(32, 32, 0xff9944ff);
+      loadGraphic(Assets.Splosion, true, true, 24, 24, false);
+      scale.x = scale.y = 2;
+      addAnimation("splode", [0,1,2,3,4,5], 15, false);
     }
   }
 }
