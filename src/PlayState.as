@@ -24,10 +24,13 @@ package
     private var currentWord:FlxBitmapFont;
     private var currentWordTaken:FlxBitmapFont;
 
+    private var restartWordGroup:WordGroup;
+
     public static const FIRST_LANE_Y:Number = 85;
     public static const DEATH_ZONE:Number = 65;
 
     public override function create():void {
+      G.init();
       FlxG.playMusic(Assets.GameplayMusic);
       FlxG.music.fadeIn(15);
 
@@ -68,20 +71,28 @@ package
       gameOverSprite.loadGraphic(Assets.GameOver, false, false, 320, 180);
       gameOverSprite.alpha = 0;
       add(gameOverSprite);
+
+      restartWordGroup = new WordGroup();
+      restartWordGroup.init("RETSART".split(''), FlxG.camera.width/2 - 28, FlxG.camera.height * (2/3), null,
+        function():void {
+          FlxG.fade(0xff000000, 2, function():void {
+            FlxG.switchState(new PlayState());
+          });
+        });
     }
 
     public override function update():void {
-      FlxG.log(G.wordGroup == null ? "null" : G.wordGroup.Word);
-
       lifeBar.scale.x = G.health;
       lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
       if(G.health <= 0 && gameOverSprite.alpha < 1) {
         if(FlxG.timeScale == 1) FlxG.music.stop();
         FlxG.timeScale = 0.1;
         gameOverSprite.alpha += FlxG.elapsed*3;
-      } else if(gameOverSprite.alpha >= 1) {
+      } else if(gameOverSprite.alpha >= 1 && FlxG.timeScale < 1) {
         gameOverSprite.alpha = 1;
         FlxG.timeScale = 1;
+        G.wordGroup = restartWordGroup;
+        add(restartWordGroup);
       }
 
       if(G.wordGroup == null) {

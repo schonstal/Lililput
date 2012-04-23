@@ -17,11 +17,12 @@ package
     public function WordGroup() {
     }
 
-    public function init(word:Array, X:Number, Y:Number, owner:EnemySprite):void {
+    public function init(word:Array, X:Number, Y:Number, owner:EnemySprite, OnComplete:Function=null):void {
       letterIndex = 0;
       letters = word;
       anyJustPressed = false;
       enemy = owner;
+      onComplete = OnComplete;
 
       var i:int = 0;
       for each(var letter:String in word) {
@@ -29,7 +30,7 @@ package
         letterSprite.init(letter, X, Y, word.length, i);
         add(letterSprite);
         letterSprites[i] = letterSprite;
-        if(i == Math.floor((word.length/2) - 1)) {
+        if(enemy != null && i == Math.floor((word.length/2) - 1)) {
           letterSprite.onFling = function():void { enemy.fling(); };
         }
         i++;
@@ -45,9 +46,10 @@ package
       }
       if(this == G.wordGroup) G.wordGroup = null;
       G.releaseLetter(letters[0]);
-      enemy.stop();
+
+      if(enemy != null) enemy.stop();
       //setAll("exists", false);
-      //if(onComplete != null) onComplete();
+      if(onComplete != null) onComplete();
     }
 
     public function prepareToDie():void {
