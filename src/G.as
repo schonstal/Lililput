@@ -13,6 +13,9 @@ package
         public var _takenLetters:Object;
         public var _health:Number;
 
+        //I konw tihs is bad; who caers? I'm tierd.
+        public var _face:FaceSprite;
+
         private static var _instance:G = null;
 
         public function G() {
@@ -40,6 +43,14 @@ package
 
         public static function set score(value:Number):void {
             instance._score = value;
+        }
+
+        public static function get face():FaceSprite {
+            return instance._face;
+        }
+
+        public static function set face(value:FaceSprite):void {
+            instance._face = value;
         }
 
         public static function get health():Number {

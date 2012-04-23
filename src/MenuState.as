@@ -21,9 +21,8 @@ package
       background.loadGraphic(Assets.Background, false, false, 320, 180);
       add(background);
 
-      headSprite = new FlxSprite(0,0);
-      headSprite.makeGraphic(PlayState.DEATH_ZONE, FlxG.height, 0xff990000, true);
-      add(headSprite);
+      G.face = new FaceSprite();
+      add(G.face);
 
       foreground = new FlxSprite(0,FlxG.height-22);
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
