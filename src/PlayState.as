@@ -14,7 +14,6 @@ package
     private var lanes:Array;
     private var bigLane:FlxGroup;
 
-    private var background:FlxSprite;
     private var foreground:FlxSprite;
     private var gameOverSprite:FlxSprite;
 
@@ -39,17 +38,37 @@ package
       FlxG.playMusic(Assets.GameplayMusic);
       FlxG.music.fadeIn(15);
 
-      background = new FlxSprite(0,0);
-      background.loadGraphic(Assets.Background, false, false, 320, 180);
+      var background:FlxSprite = new FlxSprite(0,0);
+      background.loadGraphic(Assets.Stars, false, false, 320, 160);
       add(background);
 
+      for(var b:int=3; b>=1; b--) {
+        background = new FlxSprite(0,0);
+        background.loadGraphic(Assets["Ground0"+b], false, false, 320, 180);
+        add(background);
+      }
+
       add(new EnemyLane(80, "Large"));
+
+      background = new FlxSprite(92,103);
+      background.loadGraphic(Assets.Shard01, false, false, 46, 16);
+      add(background);
+
       add(new EnemyLane(105, "Small"));
+
+      background = new FlxSprite(150,130);
+      background.loadGraphic(Assets.Shard02, false, false, 36, 8);
+      add(background);
+
       add(new EnemyLane(120, "Large"));
       add(new EnemyLane(145, "Small"));
 
       G.face = new FaceSprite();
       add(G.face);
+
+      background = new FlxSprite(0,-55);
+      background.loadGraphic(Assets.Helmet, false, false, 102, 235);
+      add(background);
 
       foreground = new FlxSprite(0,FlxG.height-22);
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);

@@ -10,9 +10,19 @@ package
     [Embed(source = "../data/enemyShadow.png")] public static var EnemyShadow:Class;
     [Embed(source = "../data/fatty.png")] public static var Fatty:Class;
     [Embed(source = "../data/fattyShadow.png")] public static var FattyShadow:Class;
-    [Embed(source = "../data/background.png")] public static var Background:Class;
     [Embed(source = "../data/foreground.png")] public static var Foreground:Class;
     [Embed(source = "../data/gameOver.png")] public static var GameOver:Class;
+
+    
+    //Background
+    [Embed(source = "../data/ground01.png")] public static var Ground01:Class;
+    [Embed(source = "../data/ground02.png")] public static var Ground02:Class;
+    [Embed(source = "../data/ground03.png")] public static var Ground03:Class;
+    [Embed(source = "../data/stars.png")] public static var Stars:Class;
+
+    [Embed(source = "../data/helmet.png")] public static var Helmet:Class;
+    [Embed(source = "../data/shard01.png")] public static var Shard01:Class;
+    [Embed(source = "../data/shard02.png")] public static var Shard02:Class;
 
     [Embed(source = "../data/face.png")] public static var Face:Class;
 
