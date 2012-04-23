@@ -28,15 +28,16 @@ package
     public static const EXPLOSION_Y:Number = -400;
     public static const EXPLOSION_X_MIN:Number = 400;
     public static const EXPLOSION_Y_MIN:Number = -200;
-    public static const EXPLOSION_DELAY_MIN:Number = 0.3;
+    public static const EXPLOSION_DELAY_MIN:Number = 0.15;
     public static const EXPLOSION_ANGULAR:Number = 300;
 
-    public static const ACTIVE_BORDER:uint = 0xffffffff;
-    public static const INACTIVE_BORDER:uint = 0xff444444;
+    public static const READY_BORDER:uint = 0xff3b187c;
+    public static const INACTIVE_BORDER:uint = 0xff8e2121;
+    public static const ACTIVE_BORDER:uint = 0xffff2983;
 
-    public static const READY_LETTER:uint = 0xff0000aa;
-    public static const ACTIVE_LETTER:uint = 0xffff00ff;
-    public static const INACTIVE_LETTER:uint = 0xff440000;
+    public static const READY_LETTER:uint = 0xffc095ff;
+    public static const ACTIVE_LETTER:uint = 0xffffffff;
+    public static const INACTIVE_LETTER:uint = 0xffff6b6d;
 
     public function LetterSprite() {
       super(-WIDTH,-WIDTH);
@@ -67,7 +68,7 @@ package
       play(letter);
 
       replaceColor(INACTIVE_LETTER, READY_LETTER);
-      replaceColor(INACTIVE_BORDER, ACTIVE_BORDER);
+      replaceColor(INACTIVE_BORDER, READY_BORDER);
 
       x = centerX - ((wordSize * WIDTH)/2.0) + (position*WIDTH);
     }
@@ -81,12 +82,14 @@ package
 
     public function onDown():void {
       replaceColor(READY_LETTER, ACTIVE_LETTER);
+      replaceColor(READY_BORDER, ACTIVE_BORDER);
       shaking = true;
     }
 
     public function prepareToDie():void {
       replaceColor(READY_LETTER, INACTIVE_LETTER);
       replaceColor(ACTIVE_LETTER, INACTIVE_LETTER);
+      replaceColor(READY_BORDER, INACTIVE_BORDER);
       replaceColor(ACTIVE_BORDER, INACTIVE_BORDER);
       preparingToDie = true;
       velocity.x = 0;
@@ -110,7 +113,8 @@ package
           angularVelocity = (Math.random() * EXPLOSION_ANGULAR + 500) * direction;
         } else {
           explosionTimer += FlxG.elapsed;
-          if(explosionTimer >= EXPLOSION_DELAY * position + EXPLOSION_DELAY_MIN) {
+          if(explosionTimer >= EXPLOSION_DELAY * position + 
+              (x/FlxG.width) * EXPLOSION_DELAY_MIN) {
             velocity.x = Math.random() * EXPLOSION_X + EXPLOSION_X_MIN;
             velocity.y = Math.random() * EXPLOSION_Y + EXPLOSION_Y_MIN;
             angularVelocity = Math.random() * EXPLOSION_ANGULAR;

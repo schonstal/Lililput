@@ -6,7 +6,6 @@ package
 
   public class MenuState extends FlxState
   {
-    private var background:FlxSprite;
     private var foreground:FlxSprite;
     private var headSprite:FlxSprite;
 
@@ -17,9 +16,15 @@ package
     public override function create():void {
       FlxG.camera.scroll.y = START_Y;
 
-      background = new FlxSprite(0,0);
-      background.loadGraphic(Assets.Background, false, false, 320, 180);
+      var background:FlxSprite = new FlxSprite(0,0);
+      background.loadGraphic(Assets.Stars, false, false, 320, 160);
       add(background);
+
+      for(var b:int=3; b>=1; b--) {
+        background = new FlxSprite(0,0);
+        background.loadGraphic(Assets["Ground0"+b], false, false, 320, 180);
+        add(background);
+      }
 
       G.face = new FaceSprite();
       add(G.face);

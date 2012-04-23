@@ -21,6 +21,7 @@ package
     protected var explosionFrames:Array;
     protected var baseAngular:Number;
     protected var damage:Number;
+    protected var letterOffset:Number = 0;
 
     public static const VARIANCE:Number = 5;
     public static const EXPLOSION_TIME:Number = 0.5;
@@ -45,7 +46,7 @@ package
       y = Y + Math.random() * VARIANCE;
       x = FlxG.width + Math.random() * VARIANCE;
       var word:Array = G.randomWord(minSize, maxSize);
-      wordGroup.init(word, x+(width/2), y-LetterSprite.WIDTH, this);
+      wordGroup.init(word, x+(width/2), y-LetterSprite.WIDTH + letterOffset, this);
       G.takeLetter(word[0], wordGroup);
       exists = true;
       preparingToExplode = false;
@@ -92,6 +93,7 @@ package
           shadow.exists = false;
           wordGroup.complete();
           G.health -= damage;
+          if(G.face) G.face.wince();
         }
       }
 
