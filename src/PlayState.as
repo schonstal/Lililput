@@ -114,12 +114,16 @@ package
       return zeroPad(minutes) + "'" + zeroPad(seconds) + "\"" + zeroPad(milliseconds);
     }
 
-    private function zeroPad(n:Number):String {
-      return (n < 10 ? "0" : "") + (n as int);
+    private function zeroPad(n:Number, zeroChar:String="0"):String {
+      return (n < 10 ? zeroChar : "") + (n as int);
     }
 
     public override function update():void {
       timeText.alpha = lifeBar.alpha = G.score/5;
+
+      if(FlxG.keys.justPressed("SPACE")) {
+        G.health = -1;
+      }
 
       if(G.health > 0) {
         G.score += FlxG.elapsed;
@@ -159,7 +163,25 @@ package
         gameOverSprite.alpha = 1;
         FlxG.timeScale = 1;
         G.wordGroup = restartWordGroup;
+        G.setHighScore();
         add(restartWordGroup);
+
+        FlxG.log(G.highScore);
+
+        var scoreText:FlxBitmapFont;
+        for(var i:int=0; i<10; i++) {
+          scoreText = new FlxBitmapFont(Assets.Numbers, 8, 8, "0123456789'\".- ", 4, 0, 0);
+          var rankText:String = zeroPad(i+1," ") + '.';
+          rankText += G.highScore[i] > 0 ? timeString(G.highScore[i]) : "--'--\"--";
+          scoreText.setText(rankText, true, 0, 8, FlxBitmapFont.ALIGN_RIGHT, false);
+          scoreText.y = i*8 + 20;
+          scoreText.x = FlxG.camera.width-70;
+          if(G.highScore[i] == G.score) {
+            scoreText.replaceColor(0xffffffff, LetterSprite.ACTIVE_BORDER);
+            scoreText.replaceColor(0xff000000, 0xffffffff);
+          }
+          add(scoreText);
+        }
       }
 
       if(G.wordGroup == null) {

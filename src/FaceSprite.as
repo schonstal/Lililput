@@ -9,6 +9,7 @@ package
     public var winceTimer:Number = 0;
     public var blowing:Boolean = false;
 
+    public var deceased:Boolean = false;
 
     public static const WINCE_TIME:Number = 0.5;
     public static const FRAMES:Object = {
@@ -31,7 +32,8 @@ package
     }
 
     public function wince():void {
-      winceTimer = WINCE_TIME;
+      if(!deceased)
+        winceTimer = WINCE_TIME;
     }
 
     public function blow(length:int):void {
@@ -42,7 +44,11 @@ package
     public override function update():void {
       winceTimer -= FlxG.elapsed;
 
-      if(blowing) {
+      if(G.health <= 0 && winceTimer <= 0) deceased = true;
+
+      if(deceased) {
+        frame = FRAMES.breath[1];
+      } else if(blowing) {
         if(finished) blowing = false;
       } else if(winceTimer > 0) {
         frame = FRAMES.wince;

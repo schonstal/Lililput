@@ -6,8 +6,10 @@ package
   {
     public function SmallExplosionSprite() {
       super();
-      //loadGraphic(Assets.Fatty, true, true, 32, 32, false);
-      makeGraphic(16, 16, 0xff9944ff);
+      loadGraphic(Assets.Splosion, true, true, 24, 24, false);
+      offset.x = 1;
+      offset.y = 3;
+      addAnimation("splode", [0,1,2,3,4,5], 15, false);
     }
   }
 }

@@ -15,6 +15,7 @@ package
 
     [Embed(source = "../data/numbers.png")] public static var Numbers:Class;
 
+    [Embed(source = "../data/splosion.png")] public static var Splosion:Class;
     
     //Background
     [Embed(source = "../data/ground01.png")] public static var Ground01:Class;
