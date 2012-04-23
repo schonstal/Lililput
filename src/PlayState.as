@@ -17,6 +17,7 @@ package
     private var background:FlxSprite;
     private var foreground:FlxSprite;
     private var headSprite:FlxSprite;
+    private var gameOverSprite:FlxSprite;
 
     private var lifeBar:FlxSprite;
 
@@ -62,6 +63,11 @@ package
       add(lifeBar);
 
       add(G.wordGroupGroup);
+
+      gameOverSprite = new FlxSprite(0,0);
+      gameOverSprite.loadGraphic(Assets.GameOver, false, false, 320, 180);
+      gameOverSprite.alpha = 0;
+      add(gameOverSprite);
     }
 
     public override function update():void {
@@ -69,6 +75,14 @@ package
 
       lifeBar.scale.x = G.health;
       lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
+      if(G.health <= 0 && gameOverSprite.alpha < 1) {
+        if(FlxG.timeScale == 1) FlxG.music.stop();
+        FlxG.timeScale = 0.1;
+        gameOverSprite.alpha += FlxG.elapsed*3;
+      } else if(gameOverSprite.alpha >= 1) {
+        gameOverSprite.alpha = 1;
+        FlxG.timeScale = 1;
+      }
 
       if(G.wordGroup == null) {
         for each(var letter:String in G.alphabet) {
