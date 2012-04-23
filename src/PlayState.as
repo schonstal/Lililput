@@ -16,8 +16,6 @@ package
 
     private var background:FlxSprite;
     private var foreground:FlxSprite;
-    private var footprintSprite:FlxSprite;
-    private var smallFootSprite:FlxSprite;
     private var headSprite:FlxSprite;
 
     private var currentWord:FlxBitmapFont;
@@ -34,14 +32,6 @@ package
       background.loadGraphic(Assets.Background, false, false, 320, 180);
       add(background);
 
-      /*
-      footprintSprite = new FlxSprite(0,0);
-      footprintSprite.makeGraphic(FlxG.width, FlxG.height, 0x00000000, true);
-      add(footprintSprite);
-
-      smallFootSprite = new FlxSprite(0,0);
-      smallFootSprite.makeGraphic(1,1,0x44000000);
-      */
       headSprite = new FlxSprite(0,0);
       headSprite.makeGraphic(DEATH_ZONE, FlxG.height, 0xff990000, true);
       add(headSprite);
@@ -62,15 +52,12 @@ package
       currentWord.width = FlxG.width;
       add(currentWord);
 */
-
       add(G.wordGroupGroup);
     }
 
-    public function footPrint(X:Number, Y:Number):void {
-      footprintSprite.stamp(smallFootSprite, X, Y);
-    }
-
     public override function update():void {
+      FlxG.log(G.wordGroup == null ? "null" : G.wordGroup.Word);
+
       if(G.wordGroup == null) {
         for each(var letter:String in G.alphabet) {
           if(FlxG.keys.justPressed(letter)) {

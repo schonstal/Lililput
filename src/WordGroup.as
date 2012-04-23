@@ -64,6 +64,10 @@ package
       }
     }
 
+    public function get Word():String {
+      return letters.join('');
+    }
+
     public function capture():void {
       if(FlxG.keys.justPressed(letters[letterIndex])) {
         letterSprites[letterIndex].onDown();
