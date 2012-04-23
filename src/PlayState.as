@@ -4,6 +4,8 @@ package
   import com.greensock.TweenLite;
   import com.greensock.easing.*; 
 
+  import org.flixel.plugin.photonstorm.*;
+
   public class PlayState extends FlxState
   {
     private var wordGroup:WordGroup = new WordGroup();
@@ -14,9 +16,10 @@ package
 
     private var background:FlxSprite;
     private var foreground:FlxSprite;
-    private var footprintSprite:FlxSprite;
-    private var smallFootSprite:FlxSprite;
     private var headSprite:FlxSprite;
+
+    private var currentWord:FlxBitmapFont;
+    private var currentWordTaken:FlxBitmapFont;
 
     public static const FIRST_LANE_Y:Number = 85;
     public static const DEATH_ZONE:Number = 65;
@@ -28,15 +31,6 @@ package
       background = new FlxSprite(0,0);
       background.loadGraphic(Assets.Background, false, false, 320, 180);
       add(background);
-
-      /*
-      footprintSprite = new FlxSprite(0,0);
-      footprintSprite.makeGraphic(FlxG.width, FlxG.height, 0x00000000, true);
-      add(footprintSprite);
-
-      smallFootSprite = new FlxSprite(0,0);
-      smallFootSprite.makeGraphic(1,1,0x44000000);
-      */
 
       headSprite = new FlxSprite(0,0);
       headSprite.makeGraphic(DEATH_ZONE, FlxG.height, 0xff990000, true);
@@ -51,14 +45,19 @@ package
       foreground.loadGraphic(Assets.Foreground, false, false, 320, 22);
       add(foreground);
 
+/*
+      currentWord = new FlxBitmapFont(Assets.LettersBig, 16, 16, FlxBitmapFont.TEXT_SET10, 6, 0, 0);
+			currentWord.setText("AMISSISSIPPI", true, 0, 8, FlxBitmapFont.ALIGN_CENTER, false);
+      currentWord.x = currentWord.y = 0;
+      currentWord.width = FlxG.width;
+      add(currentWord);
+*/
       add(G.wordGroupGroup);
     }
 
-    public function footPrint(X:Number, Y:Number):void {
-      footprintSprite.stamp(smallFootSprite, X, Y);
-    }
-
     public override function update():void {
+      FlxG.log(G.wordGroup == null ? "null" : G.wordGroup.Word);
+
       if(G.wordGroup == null) {
         for each(var letter:String in G.alphabet) {
           if(FlxG.keys.justPressed(letter)) {
