@@ -47,7 +47,7 @@ package
 
       startWordGroup = new WordGroup();
       startWordGroup.init("STRAT".split(''), 150, -900, null, function():void {
-          TweenLite.to(FlxG.camera.scroll, 5, 
+          TweenLite.to(FlxG.camera.scroll, 1, 
               {y: 0, ease: Quart.easeInOut,
               onComplete: function():void { 
                 FlxG.switchState(new PlayState());

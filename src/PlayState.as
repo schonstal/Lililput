@@ -50,13 +50,13 @@ package
         add(background);
       }
 
-      add(new EnemyLane(80, "Large"));
+      add(new EnemyLane(80, "Large", 1));
 
       background = new FlxSprite(92,103);
       background.loadGraphic(Assets.Shard01, false, false, 46, 16);
       add(background);
 
-      add(new EnemyLane(105, "Small"));
+      add(new EnemyLane(105, "Small", 0.75));
 
       background = new FlxSprite(150,130);
       background.loadGraphic(Assets.Shard02, false, false, 36, 8);
@@ -90,7 +90,7 @@ package
 
       //BG: 0xffffd070
       lifeBar = new FlxSprite(15,6);
-      lifeBar.makeGraphic(52, 6, 0xffff4444, true);
+      lifeBar.makeGraphic(52, 6, 0xffd63838, true);
       add(lifeBar);
 
       add(G.wordGroupGroup);
@@ -185,7 +185,7 @@ package
           scoreText.y = i*8 + 20;
           scoreText.x = FlxG.camera.width-70;
           if(G.highScore[i] == G.score) {
-            scoreText.replaceColor(0xffffffff, LetterSprite.ACTIVE_BORDER);
+            scoreText.replaceColor(0xffd63838, LetterSprite.ACTIVE_BORDER);
             scoreText.replaceColor(0xff000000, 0xffffffff);
           }
           add(scoreText);

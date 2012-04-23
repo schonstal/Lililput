@@ -6,18 +6,18 @@ package
   public class EnemyLane extends FlxGroup
   {
     private var spawnTimer:Number = 0;
-    private var spawnThreshold:Number = 5.0;
+    private var spawnThreshold:Number = 2.0;
     private var y:Number = 0;
     private var enemyType:String;
 
-    public static const SPAWN_MIN:Object = {
-      "Small": 5.0,
-      "Large": 10.0
-    }
+    public var spawnMin:Object = {
+      "Small": 2.0,
+      "Large": 6.5
+    };
     
     public static const HEIGHT:Number = 25;
 
-    public function EnemyLane(Y:Number, type:String) {
+    public function EnemyLane(Y:Number, type:String, offset:Number=0) {
       var thisIsSoStupid:Array = [
         SmallExplosionSprite,
         LargeExplosionSprite,
@@ -27,12 +27,13 @@ package
       enemyType = type;
       spawnTimer = spawnThreshold * Math.random() * (enemyType == "Large" ? 3 : 1);
       y = Y;
+      spawnTimer = offset;
     }
 
     public override function update():void {
       spawnTimer -= FlxG.elapsed;
       if(spawnTimer <= 0) {
-        spawnTimer = Math.random() * spawnThreshold * (enemyType == "Large" ? 3 : 1) + SPAWN_MIN[enemyType];
+        spawnTimer = Math.random() * spawnThreshold * (enemyType == "Large" ? 3 : 1) + spawnMin[enemyType];
 
         var enemyClass:Class = getDefinitionByName(enemyType + "EnemySprite") as Class;
         var enemyShadow:EnemyShadow = recycle(EnemyShadow) as EnemyShadow;
