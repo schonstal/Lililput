@@ -18,6 +18,7 @@ package
     private var gameOverSprite:FlxSprite;
 
     private var lifeBar:FlxSprite;
+    private var lifeContainer:FlxSprite;
     private var finished:Boolean = false;
 
     private var finishTimer:Number = 0;
@@ -83,8 +84,13 @@ package
 
       G.health = 1;
 
-      lifeBar = new FlxSprite(0,0);
-      lifeBar.makeGraphic(DEATH_ZONE, 14, 0xffaa44ff, true);
+      lifeContainer = new FlxSprite(6,4);
+      lifeContainer.loadGraphic(Assets.LifeContainer, false, false, 64, 10);
+      add(lifeContainer);
+
+      //BG: 0xffffd070
+      lifeBar = new FlxSprite(15,6);
+      lifeBar.makeGraphic(52, 6, 0xffff4444, true);
       add(lifeBar);
 
       add(G.wordGroupGroup);
@@ -119,7 +125,7 @@ package
     }
 
     public override function update():void {
-      timeText.alpha = lifeBar.alpha = G.score/5;
+      lifeContainer.alpha = timeText.alpha = lifeBar.alpha = G.score/5;
 
       if(FlxG.keys.justPressed("SPACE")) {
         G.health = -1;
@@ -144,7 +150,9 @@ package
       }
 
       lifeBar.scale.x = G.health;
-      lifeBar.offset.x = (DEATH_ZONE - (lifeBar.width*lifeBar.scale.x))/2;
+      lifeBar.offset.x = (lifeBar.width - (lifeBar.width*lifeBar.scale.x))/2;
+      if(lifeBar.scale.x < 0) lifeBar.exists = false;
+
       if(G.health <= 0 && gameOverSprite.alpha < 1) {
         for each(var w:WordGroup in G.wordGroupGroup.members) {
           for each(var letterSprite:LetterSprite in wordGroup.members) {
