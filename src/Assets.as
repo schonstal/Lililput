@@ -30,5 +30,13 @@ package
     [Embed(source = "../data/face.png")] public static var Face:Class;
 
     [Embed(source = "../data/music.swf", symbol="gameplayMusic")] public static var GameplayMusic:Class;
+    
+    [Embed(source = "../data/sounds.swf", symbol="BigBoom")] public static var BigBoom:Class;
+    [Embed(source = "../data/sounds.swf", symbol="BigChrage")] public static var BigCharge:Class;
+    [Embed(source = "../data/sounds.swf", symbol="BigFly")] public static var BigFly:Class;
+
+    [Embed(source = "../data/sounds.swf", symbol="LilBoom")] public static var LilBoom:Class;
+    [Embed(source = "../data/sounds.swf", symbol="LilChrage")] public static var LilCharge:Class;
+    [Embed(source = "../data/sounds.swf", symbol="LilFly")] public static var LilFly:Class;
   }
 }

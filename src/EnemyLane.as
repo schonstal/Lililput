@@ -42,7 +42,7 @@ package
         var spawnDiff:Number = spawnMax[enemyType] - spawnMin[enemyType];
         var spawnPercentage:Number = (G.score/MAX_DIFFICULTY_SECONDS);
         if(spawnPercentage > 1) spawnPercentage = 1;
-        var spawnTime = spawnMin[enemyType] + (spawnDiff * spawnPercentage);
+        var spawnTime:Number = spawnMin[enemyType] + (spawnDiff * spawnPercentage);
 
         spawnTimer = Math.random() * spawnThreshold * (enemyType == "Large" ? 3 : 1) + spawnMax[enemyType];
 
