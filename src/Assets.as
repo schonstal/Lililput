@@ -38,5 +38,8 @@ package
     [Embed(source = "../data/sounds.swf", symbol="LilBoom")] public static var LilBoom:Class;
     [Embed(source = "../data/sounds.swf", symbol="LilChrage")] public static var LilCharge:Class;
     [Embed(source = "../data/sounds.swf", symbol="LilFly")] public static var LilFly:Class;
+
+    [Embed(source = "../data/sounds.swf", symbol="Wnorg")] public static var Wrong:Class;
+    [Embed(source = "../data/sounds.swf", symbol="Rihgt")] public static var Right:Class;
   }
 }

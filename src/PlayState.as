@@ -127,10 +127,6 @@ package
     public override function update():void {
       lifeContainer.alpha = timeText.alpha = lifeBar.alpha = G.score/5;
 
-      if(FlxG.keys.justPressed("SPACE")) {
-        G.health = -1;
-      }
-
       if(G.health > 0) {
         G.score += FlxG.elapsed;
         timeText.text = timeString(G.score); 
