@@ -62,6 +62,11 @@ package
 
     public function fling():void {
       readyToFling = true;
+      if(this is LargeEnemySprite) {
+        FlxG.play(Assets.BigFly, 0.4);
+      } else {
+        FlxG.play(Assets.LilFly, 0.25);
+      }
     }
 
     public function stop():void {
