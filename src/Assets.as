@@ -12,12 +12,10 @@ package
     [Embed(source = "../data/fattyShadow.png")] public static var FattyShadow:Class;
     [Embed(source = "../data/foreground.png")] public static var Foreground:Class;
     [Embed(source = "../data/gameOver.png")] public static var GameOver:Class;
-
     [Embed(source = "../data/numbers.png")] public static var Numbers:Class;
-
     [Embed(source = "../data/splosion.png")] public static var Splosion:Class;
-
     [Embed(source = "../data/lifeContainer.png")] public static var LifeContainer:Class;
+    [Embed(source = "../data/title.png")] public static var Title:Class;
     
     //Background
     [Embed(source = "../data/ground01.png")] public static var Ground01:Class;

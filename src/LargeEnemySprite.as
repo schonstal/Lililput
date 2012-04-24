@@ -17,6 +17,7 @@ package
       shakeAmount = 0.2;
       explosionFrames = [10,11,12,13,14,14,14,13,15,16,17,18,16,17,18,16,17,18,16,19];
       letterOffset = 1;
+      startX = FlxG.width + 20;
 
       damage = 0.7;
       create();

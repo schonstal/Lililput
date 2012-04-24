@@ -11,11 +11,17 @@ package
     private var enemyType:String;
 
     public var spawnMin:Object = {
-      "Small": 2.0,
-      "Large": 6.5
+      "Small": 2.15,
+      "Large": 8
     };
+
+    public var spawnMax:Object = {
+      "Small": 3.95,
+      "Large": 12.3
+    }
     
     public static const HEIGHT:Number = 25;
+    public static const MAX_DIFFICULTY_SECONDS:Number = 240;
 
     public function EnemyLane(Y:Number, type:String, offset:Number=0) {
       var thisIsSoStupid:Array = [
@@ -33,7 +39,12 @@ package
     public override function update():void {
       spawnTimer -= FlxG.elapsed;
       if(spawnTimer <= 0) {
-        spawnTimer = Math.random() * spawnThreshold * (enemyType == "Large" ? 3 : 1) + spawnMin[enemyType];
+        var spawnDiff:Number = spawnMax[enemyType] - spawnMin[enemyType];
+        var spawnPercentage:Number = (G.score/MAX_DIFFICULTY_SECONDS);
+        if(spawnPercentage > 1) spawnPercentage = 1;
+        var spawnTime = spawnMin[enemyType] + (spawnDiff * spawnPercentage);
+
+        spawnTimer = Math.random() * spawnThreshold * (enemyType == "Large" ? 3 : 1) + spawnMax[enemyType];
 
         var enemyClass:Class = getDefinitionByName(enemyType + "EnemySprite") as Class;
         var enemyShadow:EnemyShadow = recycle(EnemyShadow) as EnemyShadow;

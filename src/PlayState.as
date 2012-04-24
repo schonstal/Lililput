@@ -50,20 +50,20 @@ package
         add(background);
       }
 
-      add(new EnemyLane(80, "Large", 1));
+      add(new EnemyLane(80, "Large", 15));
 
       background = new FlxSprite(92,103);
       background.loadGraphic(Assets.Shard01, false, false, 46, 16);
       add(background);
 
-      add(new EnemyLane(105, "Small", 0.75));
+      add(new EnemyLane(105, "Small"));
 
       background = new FlxSprite(150,130);
       background.loadGraphic(Assets.Shard02, false, false, 36, 8);
       add(background);
 
-      add(new EnemyLane(120, "Large"));
-      add(new EnemyLane(145, "Small"));
+      add(new EnemyLane(120, "Large", 22));
+      add(new EnemyLane(145, "Small", 3.5));
 
       G.face = new FaceSprite();
       add(G.face);
