@@ -1,7 +1,7 @@
 package
 {
   import org.flixel.*;
-  [SWF(width="1280", height="720", backgroundColor="#000000")]
+  [SWF(width="640", height="360", backgroundColor="#000000")]
   [Frame(factoryClass="Preloader")]
 
   public class TniyGame extends FlxGame
@@ -10,7 +10,7 @@ package
     public function TniyGame() {
       forceDebugger = true;
       FlxG.debug = true;
-      super(320,180,MenuState,4,60);
+      super(320,180,BadingState,2,60);
     }
   }
 }

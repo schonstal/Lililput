@@ -15,6 +15,7 @@ package
 
     public override function create():void {
       FlxG.camera.scroll.y = START_Y;
+      FlxG.flash(0xff000000, 1);
 
       var background:FlxSprite;
       

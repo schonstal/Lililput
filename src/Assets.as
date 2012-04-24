@@ -16,6 +16,7 @@ package
     [Embed(source = "../data/splosion.png")] public static var Splosion:Class;
     [Embed(source = "../data/lifeContainer.png")] public static var LifeContainer:Class;
     [Embed(source = "../data/title.png")] public static var Title:Class;
+    [Embed(source = "../data/splash.png")] public static var Splash:Class;
     
     //Background
     [Embed(source = "../data/ground01.png")] public static var Ground01:Class;
@@ -41,5 +42,7 @@ package
 
     [Embed(source = "../data/sounds.swf", symbol="Wnorg")] public static var Wrong:Class;
     [Embed(source = "../data/sounds.swf", symbol="Rihgt")] public static var Right:Class;
+
+    [Embed(source = "../data/sounds.swf", symbol="BaDing")] public static var BaDing:Class;
   }
 }
