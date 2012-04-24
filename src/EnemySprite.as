@@ -22,6 +22,7 @@ package
     protected var baseAngular:Number;
     protected var damage:Number;
     protected var letterOffset:Number = 0;
+    protected var startX:Number;
 
     public static const VARIANCE:Number = 5;
     public static const EXPLOSION_TIME:Number = 0.5;
@@ -44,7 +45,7 @@ package
 
     public function init(Y:Number):void {
       y = Y + Math.random() * VARIANCE;
-      x = FlxG.width + Math.random() * VARIANCE;
+      x = startX + Math.random() * VARIANCE;
       var word:Array = G.randomWord(minSize, maxSize);
       wordGroup.init(word, x+(width/2), y-LetterSprite.WIDTH + letterOffset, this);
       G.takeLetter(word[0], wordGroup);

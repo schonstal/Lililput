@@ -11,13 +11,17 @@ package
 
     private var startWordGroup:WordGroup;
 
-    public static const START_Y:Number = -1000;
+    public static const START_Y:Number = -360;
 
     public override function create():void {
       FlxG.camera.scroll.y = START_Y;
 
       var background:FlxSprite = new FlxSprite(0,0);
       background.loadGraphic(Assets.Stars, false, false, 320, 160);
+      add(background);
+
+      background = new FlxSprite(0,START_Y);
+      background.loadGraphic(Assets.Title, false, false, 320, 160);
       add(background);
 
       for(var b:int=3; b>=1; b--) {
@@ -46,7 +50,7 @@ package
       add(foreground);
 
       startWordGroup = new WordGroup();
-      startWordGroup.init("STRAT".split(''), 150, -900, null, function():void {
+      startWordGroup.init("LILILPUT".split(''), 144, START_Y + 112, null, function():void {
           TweenLite.to(FlxG.camera.scroll, 1, 
               {y: 0, ease: Quart.easeInOut,
               onComplete: function():void { 
