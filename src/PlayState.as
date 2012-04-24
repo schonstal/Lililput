@@ -101,7 +101,7 @@ package
       add(gameOverSprite);
 
       restartWordGroup = new WordGroup();
-      restartWordGroup.init("RETSART".split(''), FlxG.camera.width/2 - 28, FlxG.camera.height * (2/3), null,
+      restartWordGroup.init("RETSART".split(''), 128, 136, null,
         function():void {
           finished = true;
         });
@@ -175,11 +175,11 @@ package
         var scoreText:FlxBitmapFont;
         for(var i:int=0; i<10; i++) {
           scoreText = new FlxBitmapFont(Assets.Numbers, 8, 8, "0123456789'\".- ", 4, 0, 0);
-          var rankText:String = zeroPad(i+1," ") + '.';
+          var rankText:String = zeroPad(i+1,"0") + '.';
           rankText += G.highScore[i] > 0 ? timeString(G.highScore[i]) : "--'--\"--";
           scoreText.setText(rankText, true, 0, 8, FlxBitmapFont.ALIGN_RIGHT, false);
-          scoreText.y = i*8 + 20;
-          scoreText.x = FlxG.camera.width-70;
+          scoreText.y = 48 + i*8;
+          scoreText.x = FlxG.camera.width/2 - 44;
           if(G.highScore[i] == G.score) {
             scoreText.replaceColor(0xffd63838, LetterSprite.ACTIVE_BORDER);
             scoreText.replaceColor(0xff000000, 0xffffffff);
