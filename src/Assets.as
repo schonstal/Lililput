@@ -16,6 +16,7 @@ package
     [Embed(source = "../data/splosion.png")] public static var Splosion:Class;
     [Embed(source = "../data/lifeContainer.png")] public static var LifeContainer:Class;
     [Embed(source = "../data/title.png")] public static var Title:Class;
+    [Embed(source = "../data/splash.png")] public static var Splash:Class;
     
     //Background
     [Embed(source = "../data/ground01.png")] public static var Ground01:Class;
@@ -30,5 +31,18 @@ package
     [Embed(source = "../data/face.png")] public static var Face:Class;
 
     [Embed(source = "../data/music.swf", symbol="gameplayMusic")] public static var GameplayMusic:Class;
+    
+    [Embed(source = "../data/sounds.swf", symbol="BigBoom")] public static var BigBoom:Class;
+    [Embed(source = "../data/sounds.swf", symbol="BigChrage")] public static var BigCharge:Class;
+    [Embed(source = "../data/sounds.swf", symbol="BigFly")] public static var BigFly:Class;
+
+    [Embed(source = "../data/sounds.swf", symbol="LilBoom")] public static var LilBoom:Class;
+    [Embed(source = "../data/sounds.swf", symbol="LilChrage")] public static var LilCharge:Class;
+    [Embed(source = "../data/sounds.swf", symbol="LilFly")] public static var LilFly:Class;
+
+    [Embed(source = "../data/sounds.swf", symbol="Wnorg")] public static var Wrong:Class;
+    [Embed(source = "../data/sounds.swf", symbol="Rihgt")] public static var Right:Class;
+
+    [Embed(source = "../data/sounds.swf", symbol="BaDing")] public static var BaDing:Class;
   }
 }

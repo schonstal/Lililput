@@ -62,6 +62,11 @@ package
 
     public function fling():void {
       readyToFling = true;
+      if(this is LargeEnemySprite) {
+        FlxG.play(Assets.BigFly, 0.4);
+      } else {
+        FlxG.play(Assets.LilFly, 0.25);
+      }
     }
 
     public function stop():void {
@@ -86,6 +91,11 @@ package
           play("prepare_to_explode");
           preparingToExplode = true;
           wordGroup.prepareToDie();
+          if(this is LargeEnemySprite) {
+            FlxG.play(Assets.BigCharge);
+          } else {
+            FlxG.play(Assets.LilCharge, 0.4);
+          }
         }
         if(finished) {
           FlxG.shake(0.01, shakeAmount);
@@ -95,6 +105,11 @@ package
           wordGroup.complete();
           G.health -= damage;
           if(G.face) G.face.wince();
+          if(this is LargeEnemySprite) {
+            FlxG.play(Assets.BigBoom);
+          } else {
+            FlxG.play(Assets.LilBoom);
+          }
         }
       }
 

@@ -84,6 +84,7 @@ package
 
     public function capture():void {
       if(FlxG.keys.justPressed(letters[letterIndex])) {
+        FlxG.play(Assets.Right,0.2);
         letterSprites[letterIndex].onDown();
         letterIndex++;
         if(letterIndex >= letters.length) {
@@ -93,6 +94,7 @@ package
         anyJustPressed = true;
       } else if(FlxG.keys.any() && !anyJustPressed) {
         anyJustPressed = true;
+        FlxG.play(Assets.Wrong,0.4);
         FlxG.shake(0.01, 0.1);
       } else if(!FlxG.keys.any()) {
         anyJustPressed = false;
