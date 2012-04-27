@@ -37,7 +37,7 @@ package
 
     public override function create():void {
       G.init();
-      FlxG.playMusic(Assets.GameplayMusic);
+      FlxG.playMusic(Assets.GameplayMusic, 0);
       FlxG.music.fadeIn(START_FADE_TIME);
 
       var background:FlxSprite = new FlxSprite(0,0);
@@ -96,7 +96,7 @@ package
       add(G.wordGroupGroup);
 
       gameOverSprite = new FlxSprite(0,0);
-      gameOverSprite.loadGraphic(Assets.GameOver, false, false, 320, 180);
+      gameOverSprite.loadGraphic(Assets.FadeRed, false, false, 320, 180);
       gameOverSprite.alpha = 0;
       add(gameOverSprite);
 
@@ -108,6 +108,7 @@ package
       restartWordGroup.modal = true;
 
       if(onCreate != null) onCreate();
+      FlxG.music.volume = 1;
     }
 
     private function timeString(time:Number):String {
@@ -169,6 +170,10 @@ package
         G.wordGroup = restartWordGroup;
         G.setHighScore();
         add(restartWordGroup);
+
+        var gameOverTextSprite:FlxSprite = new FlxSprite(0,0);
+        gameOverTextSprite.loadGraphic(Assets.GameOver, false, false, 320, 180);
+        add(gameOverTextSprite);
 
         FlxG.log(G.highScore);
 

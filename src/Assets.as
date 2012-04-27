@@ -17,6 +17,7 @@ package
     [Embed(source = "../data/lifeContainer.png")] public static var LifeContainer:Class;
     [Embed(source = "../data/title.png")] public static var Title:Class;
     [Embed(source = "../data/splash.png")] public static var Splash:Class;
+    [Embed(source = "../data/fadeRed.png")] public static var FadeRed:Class;
     
     //Background
     [Embed(source = "../data/ground01.png")] public static var Ground01:Class;
