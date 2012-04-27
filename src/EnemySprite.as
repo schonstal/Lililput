@@ -21,7 +21,7 @@ package
     protected var explosionFrames:Array;
     protected var baseAngular:Number;
     protected var damage:Number;
-    protected var letterOffset:Number = 0;
+    public var letterOffset:Number = 0; //LOL
     protected var startX:Number;
 
     public static const VARIANCE:Number = 5;

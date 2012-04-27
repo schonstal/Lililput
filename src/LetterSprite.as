@@ -69,6 +69,8 @@ package
 
       replaceColor(INACTIVE_LETTER, READY_LETTER);
       replaceColor(INACTIVE_BORDER, READY_BORDER);
+      replaceColor(ACTIVE_LETTER, READY_LETTER);
+      replaceColor(ACTIVE_BORDER, READY_BORDER);
 
       x = centerX - ((wordSize * WIDTH)/2.0) + (position*WIDTH);
     }

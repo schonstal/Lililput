@@ -16,6 +16,9 @@ package
     
     public var enemy:EnemySprite;
 
+    private var x:Number;
+    private var y:Number;
+
     public static const ALPHA_RATE:Number = 2;
 
     public function WordGroup() {
@@ -28,6 +31,9 @@ package
       onCompleteCallbacks.push(OnComplete);
       alpha = (G.health > 0 ? 1 : 0);
       alive = true;
+      letterSprites = [];
+      x = X;
+      y = Y;
 
       var i:int = 0;
       for each(var letter:String in word) {
@@ -83,7 +89,6 @@ package
     }
 
     public function capture(keyboardEvent:KeyboardEvent):void {
-      FlxG.log(letters);
       if(alive && (this == G.wordGroup || G.wordGroup == null)) {
         if(FlxG.keys.getKeyCode(letters[letterIndex]) == keyboardEvent.keyCode) {
           FlxG.play(Assets.Right,0.2);
@@ -96,6 +101,18 @@ package
         } else if(G.wordGroup != null){
           FlxG.play(Assets.Wrong,0.4);
           FlxG.shake(0.01, 0.1);
+          if(FlxG.keys.getKeyCode("BACKSPACE") == keyboardEvent.keyCode) {
+            for each(var letter:LetterSprite in letterSprites) {
+              letter.exists = false;
+            }
+            if(enemy != null) {
+              G.wordGroup = null;
+              init(letters, enemy.x+(enemy.width/2), enemy.y-LetterSprite.WIDTH + enemy.letterOffset, enemy);
+              xVelocity = enemy.velocity.x;
+            } else {
+              init(letters, x, y, null);
+            }
+          }
         } 
       }
     }

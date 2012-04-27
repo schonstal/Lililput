@@ -43,7 +43,6 @@ package
         var spawnPercentage:Number = (G.score/MAX_DIFFICULTY_SECONDS);
         if(spawnPercentage > 1) spawnPercentage = 1;
         var spawnTime:Number = spawnMin[enemyType] + (spawnDiff * (1-spawnPercentage));
-        FlxG.log("Spawn time: " + spawnTime);
 
         spawnTimer = Math.random() * spawnThreshold * (enemyType == "Large" ? 3 : 1) + spawnTime;
 
