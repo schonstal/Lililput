@@ -147,7 +147,12 @@ package
               break;
             }
           }
-          return letters;
+          //THIS SEEMS REALLY DANGEROUS
+          if(wordBucket[startingLetter][letters.length].indexOf(letters.join('')) >= 0) {
+            return randomWord(minLength, maxLength);
+          } else {
+            return letters;
+          }
         }
 
         public static function pressedLetter(letter:String):void {
