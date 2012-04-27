@@ -148,7 +148,7 @@ package
             }
           }
           //THIS SEEMS REALLY DANGEROUS
-          if(wordBucket[startingLetter][letters.length].indexOf(letters.join('')) >= 0) {
+          if(wordBucket[startingLetter].indexOf(letters.join('')) >= 0) {
             return randomWord(minLength, maxLength);
           } else {
             return letters;
