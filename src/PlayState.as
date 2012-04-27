@@ -175,8 +175,6 @@ package
         gameOverTextSprite.loadGraphic(Assets.GameOver, false, false, 320, 180);
         add(gameOverTextSprite);
 
-        FlxG.log(G.highScore);
-
         var scoreText:FlxBitmapFont;
         for(var i:int=0; i<10; i++) {
           scoreText = new FlxBitmapFont(Assets.Numbers, 8, 8, "0123456789'\".- ", 4, 0, 0);
@@ -193,17 +191,10 @@ package
         }
       }
 
-      if(G.wordGroup == null) {
-        for each(var letter:String in G.alphabet) {
-          if(FlxG.keys.justPressed(letter)) {
-            G.pressedLetter(letter);
-          }
-        }
-      } 
       //This isn't an else because it could have just been set!
-      if(G.wordGroup != null) {
-        G.wordGroup.capture();
-      }
+//      if(G.wordGroup != null) {
+//        G.wordGroup.capture();
+//      }
       super.update();
     }
   }

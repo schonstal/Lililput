@@ -76,12 +76,12 @@ package
               }});
         });
 
+      G.wordGroup = startWordGroup;
       startWordGroup.modal = true;
       add(startWordGroup);
     }
 
     public override function update():void {
-      startWordGroup.capture();
       if(!G.api) (G.api = FlxG.stage.addChild(new KongApi()) as KongApi).init();
       super.update();
     }

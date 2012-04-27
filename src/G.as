@@ -1,6 +1,7 @@
 package
 {
     import org.flixel.*;
+    import flash.events.KeyboardEvent;
 
     public class G
     {
@@ -27,6 +28,12 @@ package
         private static function get instance():G {
             if(_instance == null) {
               _instance = new G();
+              FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, function(k:KeyboardEvent):void {
+                if(G.wordGroup == null) {
+                  G.pressedLetter(G.alphabet[k.keyCode - 65]);
+                }
+                if(G.wordGroup != null) G.wordGroup.capture(k); 
+              });
               init();
             }
 

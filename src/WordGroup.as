@@ -1,14 +1,13 @@
 package
 {
   import org.flixel.*;
+  import flash.events.KeyboardEvent;
 
   public class WordGroup extends FlxGroup
   {
     private var letters:Array;
     private var letterSprites:Array = [];
     public var letterIndex:Number = 0;
-
-    private var anyJustPressed:Boolean = false;
 
     private var alpha:Number = 1;
 
@@ -25,10 +24,10 @@ package
     public function init(word:Array, X:Number, Y:Number, owner:EnemySprite, OnComplete:Function=null):void {
       letterIndex = 0;
       letters = word;
-      anyJustPressed = false;
       enemy = owner;
       onCompleteCallbacks.push(OnComplete);
       alpha = (G.health > 0 ? 1 : 0);
+      alive = true;
 
       var i:int = 0;
       for each(var letter:String in word) {
@@ -56,6 +55,7 @@ package
       }
       if(this == G.wordGroup) G.wordGroup = null;
       G.releaseLetter(letters[0]);
+      alive = false;
 
       if(enemy != null) enemy.stop();
       //setAll("exists", false);
@@ -82,24 +82,22 @@ package
       return letters.join('');
     }
 
-    public function capture():void {
-      if(FlxG.keys.justPressed(letters[letterIndex])) {
-        FlxG.play(Assets.Right,0.2);
-        letterSprites[letterIndex].onDown();
-        letterIndex++;
-        if(letterIndex >= letters.length) {
-          complete();
-          if(G.face) G.face.blow(letters.length);
-        }
-        anyJustPressed = true;
-      } else if(FlxG.keys.any() && !anyJustPressed) {
-        anyJustPressed = true;
-        FlxG.play(Assets.Wrong,0.4);
-        FlxG.shake(0.01, 0.1);
-      } else if(!FlxG.keys.any()) {
-        anyJustPressed = false;
+    public function capture(keyboardEvent:KeyboardEvent):void {
+      FlxG.log(letters);
+      if(alive && (this == G.wordGroup || G.wordGroup == null)) {
+        if(FlxG.keys.getKeyCode(letters[letterIndex]) == keyboardEvent.keyCode) {
+          FlxG.play(Assets.Right,0.2);
+          letterSprites[letterIndex].onDown();
+          letterIndex++;
+          if(letterIndex >= letters.length) {
+            complete();
+            if(G.face) G.face.blow(letters.length);
+          } 
+        } else if(G.wordGroup != null){
+          FlxG.play(Assets.Wrong,0.4);
+          FlxG.shake(0.01, 0.1);
+        } 
       }
-
     }
 
     public override function update():void {
